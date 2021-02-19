@@ -42,7 +42,6 @@ class App extends Component{
   }
 
   loadUser= (data) =>{
-    console.log('invoking loaduser')
     this.setState({user: {
       id: data.user_id,
       name: data.name,
@@ -75,7 +74,7 @@ class App extends Component{
 
   onButtonSubmit = () =>{
     this.setState({imageUrl : this.state.input})
-    fetch('http://localhost:3000/invokeClarifai', {
+    fetch('https://facereg-smart-brain-api.herokuapp.com/invokeClarifai', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -85,7 +84,7 @@ class App extends Component{
     .then(response => response.json())
     .then(response => {
       if(response){
-        fetch('http://localhost:3000/image', {
+        fetch('https://facereg-smart-brain-api.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -107,7 +106,6 @@ class App extends Component{
   }
 
   onRouteChange = (route) =>{
-    console.log("inside on route change")
     if(route === 'signOut'){
       this.setState(initialState)
     }else if(route === 'home'){
